@@ -62,7 +62,7 @@ class Entrega {
     static boolean exercici1(int[] universe, Predicate<Integer> p, BiPredicate<Integer, Integer> q) {
       return false; // TO DO
     }
-
+    //Ahmad payaso
     /*
      * És cert que ∃!x ∀y. P(y) -> Q(x,y) ?
      */

@@ -247,7 +247,67 @@ class Entrega {
      * Podeu soposar que `a` està ordenat de menor a major.
      */
     static boolean exercici1(int[] a, int[][] rel) {
-      return false; // TO DO
+      //reflexiva
+        //Recorremos la matriz y comprobamos que haya relaciones (a,a)
+        //Si hay tantas relaciones como numeros en a[], es reflexiva
+        int x,y,z,t;
+        int cont=0;
+        boolean reflexiva=false;
+        for(int i=0;i<rel.length;i++){
+            x= rel[i][0];
+            y= rel[i][1];
+            if(x==y){
+                cont++;
+            }
+        }
+        if(cont== a.length){
+            reflexiva=true;
+        }
+        //simetrica
+        //Recorremos la matriz 2 veces para comprobar si existe la combinacion girada
+        boolean simetrica=false;
+        cont=0;
+        for (int i=0;i<rel.length;i++){
+            x= rel[i][0];
+            y= rel[i][1];
+            for(int j=0; j<rel.length;j++){
+                z= rel[i][1];
+                t= rel[i][0];
+                if((x==z)&&(y==t)){
+                    cont++;  
+                }
+            }
+        }
+        if (cont==rel.length){
+            simetrica=true;
+        }
+        
+        boolean transitiva=false;
+        cont=0;
+        for (int i=0;i<rel.length;i++){
+            x= rel[i][0];
+            y= rel[i][1];
+            for(int j=0; j<rel.length;j++){
+                z= rel[i][0];
+                t= rel[i][1];
+                
+                    for(int k=0;k<rel.length;k++){
+                        int b= rel[i][0];
+                        int c= rel[i][1];
+                        if(!(y==z) || (x==b && t==c)){
+                            cont++;
+                        }
+                }
+            
+            }
+        }
+        if(cont==rel.length){
+            transitiva=true;
+        }
+        
+        
+        
+      return (reflexiva && simetrica && transitiva);
     }
 
     /*

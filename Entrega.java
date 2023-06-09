@@ -92,8 +92,10 @@ class Entrega {
       private boolean unic=false;
       private int cont;
       for(int i=0; i<universe.lenght;i++){
+        int y = universe[i];
         cont=0;
         for (int j =0; j<universe.lenght;j++){
+          int x = universe[j];
           if (p.test(x)){
            cont++;
           }

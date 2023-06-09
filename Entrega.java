@@ -98,7 +98,7 @@ class Entrega {
            cont++;
           }
         }
-        if (cont==true){
+        if (cont==1){
           unic=true;
         }
       }

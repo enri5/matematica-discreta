@@ -93,12 +93,12 @@ class Entrega {
     static boolean exercici2(int[] universe, Predicate<Integer> p, BiPredicate<Integer, Integer> q) {
       private boolean unic=false;
       private int cont;
-      for(int i=0; i<universe.lenght;i++){
+     for(int i=0; i<universe.lenght;i++){
         int y = universe[i];
         cont=0;
         for (int j =0; j<universe.lenght;j++){
           int x = universe[j];
-          if (p.test(x)){
+          if (!p.test(x) || q.test(x,y){
            cont++;
           }
         }
@@ -106,9 +106,6 @@ class Entrega {
           unic=true;
         }
       }
-      
-      
-      return false; // TO DO
     }
 
     /*

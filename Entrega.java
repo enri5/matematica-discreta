@@ -113,7 +113,21 @@ class Entrega {
      * És cert que ∃x,y ∀z. P(x,z) ⊕ Q(y,z) ?
      */
     static boolean exercici3(int[] universe, BiPredicate<Integer, Integer> p, BiPredicate<Integer, Integer> q) {
-      return false; // TO DO
+      boolean cumple=false;
+      for (int i=0; i<universe.length;i++){
+        for (int j=0; j<universe.length;j++){
+          int todoz=0;
+          for (int k=0; k<universe.length;k++){
+            if((!p.test(x,z) && q.test(y,z)) || (p.test(x,z) && !q.test(y,z)){
+              todoz++;
+            }
+          }
+          if(todoz==universe.length){
+            cumple=true;
+          }
+        }
+      }
+      return cumple; // TO DO
     }
 
     /*

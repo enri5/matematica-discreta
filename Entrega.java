@@ -103,10 +103,13 @@ class Entrega {
     static boolean exercici3(int[] universe, BiPredicate<Integer, Integer> p, BiPredicate<Integer, Integer> q) {
       boolean cumple=false;
       for (int i=0; i<universe.length;i++){
+        int x = universe[i];
         for (int j=0; j<universe.length;j++){
+          int y = universe[j];
           int todoz=0;
           for (int k=0; k<universe.length;k++){
-            if((!p.test(x,z) && q.test(y,z)) || (p.test(x,z) && !q.test(y,z)){
+            int z = universe[k];
+            if((!p.test(x,z) && q.test(y,z)) || (p.test(x,z) && !q.test(y,z))){
               todoz++;
             }
           }
@@ -115,7 +118,7 @@ class Entrega {
           }
         }
       }
-      return cumple; // TO DO
+      return cumple;
     }
 
     /*

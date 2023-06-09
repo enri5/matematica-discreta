@@ -73,7 +73,8 @@ class Entrega {
                         } else {
                             return false;
                         }
-                    }
+                    }else if (q.test(x,y)){
+                      ytrobat = true;
                 }
             }
         }

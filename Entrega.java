@@ -59,31 +59,33 @@ class Entrega {
     /*
      * És cert que ∀x ∃!y. P(x) -> Q(x,y) ?
      */
-    static boolean exercici1(int[] universe, Predicate<Integer> p, BiPredicate<Integer, Integer> q) {
-        // TO DO
-        boolean ytrobat = false;
-        for (int i = 0; i < universe.length; i++) {
-            int x = universe[i];
-            for (int j = 1; j < universe.length; j++) {
-                int y = universe[j];
-                if (p.test(x)) {
-                    if (q.test(x, y)) {
-                        if (!ytrobat) {
+        static boolean exercici1(int[] universe, Predicate<Integer> p, BiPredicate<Integer, Integer> q) {
+            // TO DO
+            boolean ytrobat = false;
+            for (int i = 0; i < universe.length; i++) {
+                int x = universe[i];
+                for (int j = 1; j < universe.length; j++) {
+                    int y = universe[j];
+                    if (p.test(x)) {
+                        if (q.test(x, y)) {
+                            if (!ytrobat) {
+                                ytrobat = true;
+                            } else {
+                                return false;
+                            }
+                        } else if (q.test(x, y)) {
                             ytrobat = true;
-                        } else {
-                            return false;
                         }
-                    }else if (q.test(x,y)){
-                      ytrobat = true;
+                    }
                 }
             }
+            if (ytrobat) {
+                return true;
+            } else {
+                return false;
+            }
+
         }
-        if (ytrobat) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     /*
      * És cert que ∃!x ∀y. P(y) -> Q(x,y) ?

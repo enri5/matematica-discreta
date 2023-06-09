@@ -106,6 +106,7 @@ class Entrega {
           unic=true;
         }
       }
+      return unic;
     }
 
     /*

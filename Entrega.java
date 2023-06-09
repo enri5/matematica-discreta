@@ -63,28 +63,18 @@ class Entrega {
             // TO DO
             boolean ytrobat = false;
             for (int i = 0; i < universe.length; i++) {
-                int x = universe[i];
-                for (int j = 1; j < universe.length; j++) {
-                    int y = universe[j];
-                    if (p.test(x)) {
-                        if (q.test(x, y)) {
-                            if (!ytrobat) {
-                                ytrobat = true;
-                            } else {
-                                return false;
-                            }
-                        } else if (q.test(x, y)) {
+                int y = universe[i];
+                boolean seguirbuscando = true;
+                for (int j = 0; (j < universe.length) && seguirbuscando; j++) {
+                    int x = universe[j];
+                    if (!p.test(x) || q.test(x, y)) {
                             ytrobat = true;
+                        } else {
+                            seguirbuscando = false;
                         }
                     }
                 }
-            }
-            if (ytrobat) {
-                return true;
-            } else {
-                return false;
-            }
-
+            return ytrobat;
         }
 
     /*

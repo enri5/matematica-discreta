@@ -98,7 +98,7 @@ class Entrega {
         cont=0;
         for (int j =0; j<universe.lenght;j++){
           int y = universe[j];
-          if (!p.test(x) || q.test(x,y){
+          if (!p.test(x) || q.test(x,y)){
            cont++;
           }
         }

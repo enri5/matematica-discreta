@@ -64,13 +64,13 @@ class Entrega {
             boolean ytrobat = false;
             for (int i = 0; i < universe.length; i++) {
                 int y = universe[i];
-                boolean seguirbuscando = true;
-                for (int j = 0; (j < universe.length) && seguirbuscando; j++) {
+                boolean seguircomprobando = true;
+                for (int j = 0; (j < universe.length) && seguircomprobando; j++) {
                     int x = universe[j];
                     if (!p.test(x) || q.test(x, y)) {
                             ytrobat = true;
                         } else {
-                            seguirbuscando = false;
+                            seguircomprobando = false;
                         }
                     }
                 }

@@ -326,6 +326,7 @@ class Entrega {
      * Podeu soposar que `a` i `b` estan ordenats de menor a major.
      */
     static boolean exercici3(int[] a, int[] b, int[][] rel) {
+        //    MAL!! VOLVER A REALIZAR 
       boolean relacio = true;
         for (int i = 0; i < a.length; i++) {
              int ax = a[i];

@@ -324,6 +324,72 @@ class Entrega {
      * Podeu soposar que `a` està ordenat de menor a major.
      */
     static int exercici2(int[] a, int[][] rel) {
+       //reflexiva
+        //Recorremos la matriz y comprobamos que haya relaciones (a,a)
+        //Si hay tantas relaciones como numeros en a[], es reflexiva
+        int x,y,z,t;
+        int cont=0;
+        boolean reflexiva=false;
+        for(int i=0;i<rel.length;i++){
+            x= rel[i][0];
+            y= rel[i][1];
+            if(x==y){
+                cont++;
+            }
+        }
+        if(cont== a.length){
+            reflexiva=true;
+        }
+        //simetrica
+        //Recorremos la matriz 2 veces para comprobar si existe la combinacion girada
+        boolean simetrica=false;
+        cont=0;
+        for (int i=0;i<rel.length;i++){
+            x= rel[i][0];
+            y= rel[i][1];
+            for(int j=0; j<rel.length;j++){
+                z= rel[j][1];
+                t= rel[j][0];
+                if((x==z)&&(y==t)){
+                    cont++;  
+                }
+            }
+        }
+        if (cont==rel.length){
+            simetrica=true;
+        }
+        //transitiva
+        //partimos de que es transitiva y si no se cumple la condicion deja de serlo
+        boolean transitiva=true;
+        cont=0;
+        for (int i=0;i<rel.length;i++){
+            x= rel[i][0];
+            y= rel[i][1];
+            for(int j=0; j<rel.length;j++){
+                z= rel[j][0];
+                t= rel[j][1];
+              //recorremos 2 veces la matriz para encontrar aRb1 y b2Rc
+                
+                if(y==z){ // si b1==b2
+                    boolean encontrada=false;
+                    for(int k=0;k<rel.length;k++){  //buscamos aRc
+                        int b= rel[k][0];
+                        int c= rel[k][1];
+                        if((x==b && t==c)){  //si a==a y c==c
+                            encontrada=true;
+                        }
+                    }
+                    if(!encontrada){  //si acabamos el bucle y no se cumple la cond, no es transitiva
+                        transitiva=false;
+                    }
+                }
+            
+            }
+        }
+      
+      if(reflexiva && simetrica && transitiva){
+        
+      }
       return 0; // TO DO
     }
 

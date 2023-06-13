@@ -329,6 +329,7 @@ class Entrega {
         //Si hay tantas relaciones como numeros en a[], es reflexiva
         int x,y,z,t;
         int cont=0;
+        int retorn =-1;
         boolean reflexiva=false;
         for(int i=0;i<rel.length;i++){
             x= rel[i][0];
@@ -388,9 +389,9 @@ class Entrega {
         }
       
       if(reflexiva && simetrica && transitiva){
-        
+        retorn = rel.length;
       }
-      return 0; // TO DO
+      return retorn; // TO DO
     }
 
     /*

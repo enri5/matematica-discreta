@@ -551,7 +551,16 @@ class Entrega {
      * Retornau l'ordre menys la mida del graf (no dirigit).
      */
     static int exercici1(int[][] g) {
-      return -1; // TO DO
+      int cont=0;
+      for (int i=0; i<g.length;i++){
+        for (int j=0; j<g[0].length;j++){
+          if(g[i][j]==1){
+            cont++;
+          }
+        }
+        }
+      cont= cont/2;
+      return g.length - cont;
     }
 
     /*

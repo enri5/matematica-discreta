@@ -550,8 +550,8 @@ class Entrega {
     /*
      * Retornau l'ordre menys la mida del graf (no dirigit).
      */
-    static int exercici1(int[][] g) {
-    int cont=0;
+    static int exercici1(int[][] g) {   //Recorremos la matriz, cada numero es una conexion
+    int cont=0;                         //Cada 2 conexiones es una arista, por lo tanto /2
       for (int i=0; i<g.length;i++){
         for (int j=0; j<g[i].length;j++){
             cont++;
@@ -566,9 +566,9 @@ class Entrega {
      */
     static boolean exercici2(int[][] g) {
       
-      int grupo2=g[0][0];
-        boolean g1,g2;
-        boolean bipartit=true;
+      int grupo2=g[0][0];             //Si es pipartido hay 2 grupos de nodos
+        boolean g1,g2;                //El grupo de v0 y el grupo al que se conecta v0
+        boolean bipartit=true;        //Miramos si es uno de los 2 grupos, si no, no es bipartido
         for (int i=0; i<g.length;i++){
             g1=true;
             g2=true;
@@ -580,7 +580,7 @@ class Entrega {
                     g2= false;
                 }
             }
-            if(!(g1 || g2)){
+            if(!(g1 || g2)){      //O un grupo o otro, si no no es bipartido
                 bipartit=false;
             }
       }

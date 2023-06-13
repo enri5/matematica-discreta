@@ -550,6 +550,7 @@ class Entrega {
     /*
      * Retornau l'ordre menys la mida del graf (no dirigit).
      */
+    static int exercici1(int[][] g) {
     int cont=0;
       for (int i=0; i<g.length;i++){
         for (int j=0; j<g[i].length;j++){
@@ -564,7 +565,26 @@ class Entrega {
      * Suposau que el graf (no dirigit) és connex. És bipartit?
      */
     static boolean exercici2(int[][] g) {
-      return false; // TO DO
+      
+      int grupo2=g[0][0];
+        boolean g1,g2;
+        boolean bipartit=true;
+        for (int i=0; i<g.length;i++){
+            g1=true;
+            g2=true;
+            for (int j=0; j<g[i].length;j++){
+                if(g[i][j]==0){
+                    g1=false;
+                }
+                if (g[i][j]==grupo2){
+                    g2= false;
+                }
+            }
+            if(!(g1 || g2)){
+                bipartit=false;
+            }
+      }
+      return bipartit; // TO DO
     }
 
     /*

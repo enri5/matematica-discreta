@@ -729,7 +729,48 @@ class Entrega {
      * Si no en té, retornau null.
      */
     static int[] exercici1(int a, int b, int n) {
-      return null; // TO DO
+      
+        //Aloritmo de Euclides para calcular mcd
+        int c, d,tempx0,tempx1,tempx2,tempy0,tempy1,tempy2;
+        c=a;
+        d=n;
+        int cociente;
+        tempx0=1;
+        tempy0=0;
+        tempx1=0;
+        tempy1=1;
+        tempx2=0;
+        tempy2=0;
+        while(c != 0){
+            int x = c;
+            cociente=d/c;
+            System.out.println("Cociente " +cociente);
+            c = d%c;
+            System.out.println("c " +c);
+            d= x;
+            tempx2= tempx0-(tempx1*cociente);
+            tempy2= tempy0-(tempy1*cociente);
+            tempx0=tempx1;
+            tempx1=tempx2;
+            tempy0=tempy1;
+            tempy1=tempy2;
+            System.out.println("temp1 " +tempx0);
+            System.out.println("temp2 " +tempx2);
+        }
+        
+        if( b % d != 0){
+            return null;
+        }
+        
+        cociente= b/d;
+        System.out.println("Cociente " +cociente);
+        tempy2 = tempy0 * cociente;
+        tempx2 = tempx0 *cociente;
+        System.out.println(tempx0);
+        
+        return (new int[] {tempx0,n});
+        
+        // ax + dy = b
     }
 
     /*

@@ -418,9 +418,34 @@ class Entrega {
      *
      * Podeu suposar que `dom` i `codom` estàn ordenats de menor a major.
      */
-    static int exercici4(int[] dom, int[] codom, Function<Integer, Integer> f) {
-      return -1; // TO DO
-    }
+        static int exercici4(int[] dom, int[] codom, Function<Integer, Integer> f) {
+            exhaustiva(dom, codom, f);
+            injectiva(dom, codom, f);
+            //En procés, acabar!!
+            return -1;
+        }
+        // SUBMETODOS PARA EL exercici4
+        static boolean exhaustiva(int[] dom, int[] codom, Function<Integer, Integer> f) {
+            for (int i = 0; i < codom.length; i++) {
+                for (int j = 0; j < dom.length; j++) {
+                    if (f.apply(codom[i]) == dom[j]) {
+                        System.out.println("El " + codom[i] + " correspon a: " + f.apply(codom[i]));
+                    }
+                }
+            }
+            return false;
+        }
+
+        static boolean injectiva(int[] dom, int[] codom, Function<Integer, Integer> f) {
+            for (int i = 0; i < dom.length; i++) {
+                for (int j = 0; j < codom.length; j++) {
+                    if (f.apply(dom[i]) == codom[j]) {
+                        System.out.println("El " + dom[i] + " correspon a: " + codom[j]);
+                    }
+                }
+            }
+            return false;
+        }
 
     /*
      * Aquí teniu alguns exemples i proves relacionades amb aquests exercicis (vegeu `main`)

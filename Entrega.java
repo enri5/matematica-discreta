@@ -389,7 +389,7 @@ class Entrega {
         }
       
       if(reflexiva && simetrica && transitiva){
-        retorn = rel.length;
+        retorn = a.length /3;
       }
       return retorn; // TO DO
     }

@@ -819,6 +819,17 @@ class Entrega {
      * (el que coneixeu com el mètode manual d'anar provant).
      */
     static ArrayList<Integer> exercici3a(int n) {
+      int[] factoresPrimos = new int[n / 2 + 1];
+        int indice = 0;
+
+        for (int i = 2; i <= n; i++) {
+            while (n % i == 0) {
+                factoresPrimos[indice] = i;
+                indice++;
+                n /= i;
+            }
+        }
+        factoresPrimos = Arrays.copyOfRange(factoresPrimos, 0, indice);
       return new ArrayList<>(); // TO DO
     }
 

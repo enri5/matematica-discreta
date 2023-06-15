@@ -399,16 +399,16 @@ class Entrega {
      *
      * Podeu soposar que `a` i `b` estan ordenats de menor a major.
      */
-    static boolean exercici3(int[] a, int[] b, int[][] rel) {
-        //    MAL!! VOLVER A REALIZAR 
-      boolean relacio = true;
-        for (int i = 0; i < a.length; i++) {
-             int ax = a[i];
-             int bx = b[i];
-             relacio = rel[i][0] == ax && rel[i][1] == bx;
+        static boolean exercici3(int[] a, int[] b, int[][] rel) {
+            boolean funcio = true;
+            for (int i = 0; (i < a.length) && funcio; i++) {
+                int ax = a[i];
+                int bx = b[i];
+                funcio = rel[i][0] == ax && rel[i][1] == bx;
+
+            }
+            return funcio;
         }
-      return relacio;
-    }
 
     /*
      * Suposau que `f` és una funció amb domini `dom` i codomini `codom`.  Retornau:

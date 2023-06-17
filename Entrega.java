@@ -450,18 +450,18 @@ class Entrega {
 
         // SUBMETODOS PARA exercici4
         static int[][] exhaustiva(int[] dom, int[] codom, Function<Integer, Integer> f) {
-            float[] imagenes = new float[dom.length];
             for (int i = 0; i < dom.length; i++) {  //Rellenamos array con las imagenes 
-                imagenes[i] = (float) f.apply((dom[i]));
-                System.out.println(imagenes[i]);
+                imagenes[i] = f.apply((dom[i]));
             }
             
             int Anti[][] = new int[2][dom.length];
+            
             for (int i = 0; i < Anti.length;i++){
                 for (int j = 0; j < Anti[0].length;j++){
                 Anti[i][j] = 0;
             }
             }
+          // En la primera fila escribiremos si hay antiimagen, y en la segunda cuantas
             for (int i = 0; i < imagenes.length; i++) {  
                 for (int j = 0; j < codom.length; j++) {
                     if (imagenes[i] == codom[j]) { 
@@ -469,7 +469,6 @@ class Entrega {
                         Anti[1][i] ++;
                     }
                 }
-                System.out.println(Anti[0][i] +" "+ Anti[1][i]);
             }
             
             return Anti;
@@ -482,7 +481,8 @@ class Entrega {
                 imagenes[i] = f.apply(dom[i]);
             }
 
-            int[] noIguales = new int [2];
+            int[] noIguales = new int [2]; 
+            //El primer numero nos dice si es inyectiva o no y el segundo el cardinal de las imágenes
             int cont = 0;
             
             for (int i = 0; (i < imagenes.length - 1); i++) {  
@@ -494,7 +494,7 @@ class Entrega {
                 }cont ++;
             }
             
-            noIguales[1] = dom.length - codom.length;
+            noIguales[1] = cont - codom.length;
             return noIguales;
         }
     /*

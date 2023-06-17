@@ -422,6 +422,7 @@ class Entrega {
             int[] Injectiva = injectiva(dom, codom, f);
             int[][] Exhaustiva = exhaustiva(dom,codom,f);
             boolean esExhaustiva = true;
+            boolean esInjectiva = Injectiva[0] == 1;
             for (int i = 0; i < Exhaustiva[0].length && esExhaustiva; i++){
                 if (Exhaustiva[0][i] != 1){
                     esExhaustiva = false;
@@ -437,7 +438,7 @@ class Entrega {
                     }
                 }
                 return max;
-            } else if (Injectiva[0] != 1) {
+            } else if (esInjectiva) {
                 System.out.println("Es Injectiva!!!");
                 System.out.println(Injectiva[1]);
               //Devolvemos la diferencia entre el cardinal de imagenes y el cardinal del codominio

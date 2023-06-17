@@ -430,6 +430,7 @@ class Entrega {
             if (esExhaustiva) {
                 System.out.println("Es Exhaustiva!!!");
                 int max = 0;
+              //Al ser exhaustiva, buscamos el cardinal máximo de antiimagenes
                 for (int i = 0; i < Exhaustiva[0].length; i++){
                     if (Exhaustiva[1][i] > max){
                         max = Exhaustiva[1][i];
@@ -439,6 +440,7 @@ class Entrega {
             } else if (Injectiva[0] != 1) {
                 System.out.println("Es Injectiva!!!");
                 System.out.println(Injectiva[1]);
+              //Devolvemos la diferencia entre el cardinal de imagenes y el cardinal del codominio
                 return Injectiva[1];
 
             } else {

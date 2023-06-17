@@ -419,34 +419,84 @@ class Entrega {
      * Podeu suposar que `dom` i `codom` estàn ordenats de menor a major.
      */
         static int exercici4(int[] dom, int[] codom, Function<Integer, Integer> f) {
-            exhaustiva(dom, codom, f);
-            injectiva(dom, codom, f);
-            //En procés, acabar!!
-            return -1;
-        }
-        // SUBMETODOS PARA EL exercici4
-        static boolean exhaustiva(int[] dom, int[] codom, Function<Integer, Integer> f) {
-            for (int i = 0; i < codom.length; i++) {
-                for (int j = 0; j < dom.length; j++) {
-                    if (f.apply(codom[i]) == dom[j]) {
-                        System.out.println("El " + codom[i] + " correspon a: " + f.apply(codom[i]));
-                    }
+            int[] Injectiva = injectiva(dom, codom, f);
+            int[][] Exhaustiva = exhaustiva(dom,codom,f);
+            boolean esExhaustiva = true;
+            for (int i = 0; i < Exhaustiva[0].length && esExhaustiva; i++){
+                if (Exhaustiva[0][i] != 1){
+                    esExhaustiva = false;
                 }
             }
-            return false;
+            if (esExhaustiva) {
+                System.out.println("Es Exhaustiva!!!");
+                int max = 0;
+                for (int i = 0; i < Exhaustiva[0].length; i++){
+                    if (Exhaustiva[1][i] > max){
+                        max = Exhaustiva[1][i];
+                    }
+                }
+                return max;
+            } else if (Injectiva[0] != 1) {
+                System.out.println("Es Injectiva!!!");
+                System.out.println(Injectiva[1]);
+                return Injectiva[1];
+
+            } else {
+                System.out.println("No es ni injectiva ni exhaustiva");
+                return 0;
+            }
+
         }
 
-        static boolean injectiva(int[] dom, int[] codom, Function<Integer, Integer> f) {
-            for (int i = 0; i < dom.length; i++) {
+        // SUBMETODOS PARA exercici4
+        static int[][] exhaustiva(int[] dom, int[] codom, Function<Integer, Integer> f) {
+            float[] imagenes = new float[dom.length];
+            for (int i = 0; i < dom.length; i++) {  //Rellenamos array con las imagenes 
+                imagenes[i] = (float) f.apply((dom[i]));
+                System.out.println(imagenes[i]);
+            }
+            
+            int Anti[][] = new int[2][dom.length];
+            for (int i = 0; i < Anti.length;i++){
+                for (int j = 0; j < Anti[0].length;j++){
+                Anti[i][j] = 0;
+            }
+            }
+            for (int i = 0; i < imagenes.length; i++) {  
                 for (int j = 0; j < codom.length; j++) {
-                    if (f.apply(dom[i]) == codom[j]) {
-                        System.out.println("El " + dom[i] + " correspon a: " + codom[j]);
+                    if (imagenes[i] == codom[j]) { 
+                        Anti[0][i] = 1;
+                        Anti[1][i] ++;
                     }
                 }
+                System.out.println(Anti[0][i] +" "+ Anti[1][i]);
             }
-            return false;
+            
+            return Anti;
         }
 
+
+        static int[] injectiva(int[] dom, int[] codom, Function<Integer, Integer> f) {
+            int[] imagenes = new int[dom.length];
+            for (int i = 0; i < dom.length; i++) {  //Rellenamos array con las imagenes 
+                imagenes[i] = f.apply(dom[i]);
+            }
+
+            int[] noIguales = new int [2];
+            int cont = 0;
+            
+            for (int i = 0; (i < imagenes.length - 1); i++) {  
+                for (int j = i + 1; j < imagenes.length; j++) {
+                    if (imagenes[i] == imagenes[j]) { // si encontramos dos imagenes iguales, no es inyectiva
+                        noIguales[0] = 1;
+                    }
+                    
+                }cont ++;
+            }
+            
+            noIguales[1] = dom.length - codom.length;
+            return noIguales;
+        }
     /*
      * Aquí teniu alguns exemples i proves relacionades amb aquests exercicis (vegeu `main`)
      */

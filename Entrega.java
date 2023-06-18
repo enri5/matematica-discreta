@@ -663,9 +663,25 @@ class Entrega {
      * Suposau que el graf és un DAG. Retornau el nombre de descendents amb grau de sortida 0 del
      * vèrtex i-èssim.
      */
-    static int exercici3(int[][] g, int i) {
-      return -1; // TO DO
-    }
+        static int exercici3(int[][] g, int i) {
+            int cont = 0;
+
+            for (int v = i; v < g.length; v++) {
+                boolean esFulla = true;
+
+                for (int vei = 0; vei < g[v].length; vei++) {
+                    if (g[v].length != 0) {
+                        esFulla = false;
+                    }
+                }
+
+                if (esFulla) {
+                    cont++;
+                }
+            }
+            System.out.println(cont);
+            return cont;
+        }
 
     /*
      * Donat un arbre arrelat (dirigit, suposau que l'arrel es el vèrtex 0), trobau-ne el diàmetre

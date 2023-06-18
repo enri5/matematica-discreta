@@ -682,6 +682,45 @@ class Entrega {
             System.out.println(cont);
             return cont;
         }
+    //    static int exercici3(int[][] g, int i) {
+//        int cont=0;
+//       boolean[] visto = new boolean[g.length];
+//       for(int j=i;j<g.length;j++){  //j=i porque le metemos el nodo por el que empieza a buscar.
+//           if(!visto[j]){
+//               Preorden(j, visto,g,cont);
+//           }
+//       }
+//        
+//      return cont; // TO DO
+//    }
+//    
+//    /*
+//        Hay que recorrer la matriz de esta manera, cuando la longitud de una fila sea 0
+//        sumamos porque quiere decir que es una hoja, pero me da error. Si no es hoja y
+//        hay un nodo sin visitar lo visita, por eso llamamos al metodo dentro del metodo.
+//        El ejercicio 4 es lo mismo, solo que hay que ir sumando cada vez que te metes en un
+//        nodo el contador, y guardamos el numero mas grande de trayectoria que es el diametro
+//    */
+//    static int Preorden(int nodo, boolean visto[],int matriz[][], int cont){
+//        
+//        visto[nodo]=true;
+//        
+//        if(matriz[nodo].length==0){
+//            cont++;
+//        }else{
+//            for(int i=0;i<matriz[nodo].length;i++){
+//                if(!visto[matriz[nodo][i]]){
+//                    Preorden( nodo,visto,matriz,cont);
+//                }
+// 
+//            }
+//        }
+//        
+//        
+//        return cont;           
+//               
+//        
+//    }
 
     /*
      * Donat un arbre arrelat (dirigit, suposau que l'arrel es el vèrtex 0), trobau-ne el diàmetre

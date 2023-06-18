@@ -420,32 +420,26 @@ class Entrega {
      */
         static int exercici4(int[] dom, int[] codom, Function<Integer, Integer> f) {
             int[] Injectiva = injectiva(dom, codom, f);
-            int[][] Exhaustiva = exhaustiva(dom,codom,f);
+            int[][] Exhaustiva = exhaustiva(dom, codom, f);
             boolean esExhaustiva = true;
-            boolean esInjectiva = Injectiva[0] == 1;
-            for (int i = 0; i < Exhaustiva[0].length && esExhaustiva; i++){
-                if (Exhaustiva[0][i] != 1){
+            boolean esInjectiva = Injectiva[0] == 0;
+            for (int i = 0; i < Exhaustiva[0].length && esExhaustiva; i++) {
+                if (Exhaustiva[0][i] != 1) {
                     esExhaustiva = false;
                 }
             }
             if (esExhaustiva) {
-                System.out.println("Es Exhaustiva!!!");
                 int max = 0;
-              //Al ser exhaustiva, buscamos el cardinal máximo de antiimagenes
-                for (int i = 0; i < Exhaustiva[0].length; i++){
-                    if (Exhaustiva[1][i] > max){
+                for (int i = 0; i < Exhaustiva[0].length; i++) {
+                    if (Exhaustiva[1][i] > max) {
                         max = Exhaustiva[1][i];
                     }
                 }
                 return max;
             } else if (esInjectiva) {
-                System.out.println("Es Injectiva!!!");
-                System.out.println(Injectiva[1]);
-              //Devolvemos la diferencia entre el cardinal de imagenes y el cardinal del codominio
                 return Injectiva[1];
 
             } else {
-                System.out.println("No es ni injectiva ni exhaustiva");
                 return 0;
             }
 
@@ -453,30 +447,31 @@ class Entrega {
 
         // SUBMETODOS PARA exercici4
         static int[][] exhaustiva(int[] dom, int[] codom, Function<Integer, Integer> f) {
+            float[] imagenes = new float[dom.length];
             for (int i = 0; i < dom.length; i++) {  //Rellenamos array con las imagenes 
                 imagenes[i] = f.apply((dom[i]));
             }
-            
-            int Anti[][] = new int[2][dom.length];
-            
-            for (int i = 0; i < Anti.length;i++){
-                for (int j = 0; j < Anti[0].length;j++){
-                Anti[i][j] = 0;
+            //Array donde en la primera fila pondremos si hay antiimagen en el elemento, y en la segunda el cardinal
+            int Anti[][] = new int[2][codom.length];
+
+            //Rellenamos la array de 0
+            for (int i = 0; i < Anti.length; i++) {
+                for (int j = 0; j < Anti[0].length; j++) {
+                    Anti[i][j] = 0;
+                }
             }
-            }
-          // En la primera fila escribiremos si hay antiimagen, y en la segunda cuantas
-            for (int i = 0; i < imagenes.length; i++) {  
-                for (int j = 0; j < codom.length; j++) {
-                    if (imagenes[i] == codom[j]) { 
+            //Hacemos la comprobación de que exista la antiimagen para todo el codominio
+            for (int i = 0; i < codom.length; i++) {
+                for (int j = 0; j < imagenes.length; j++) {
+                    if (codom[i] == imagenes[j]) {
                         Anti[0][i] = 1;
-                        Anti[1][i] ++;
+                        Anti[1][i]++;
                     }
                 }
             }
-            
+
             return Anti;
         }
-
 
         static int[] injectiva(int[] dom, int[] codom, Function<Integer, Integer> f) {
             int[] imagenes = new int[dom.length];
@@ -484,20 +479,19 @@ class Entrega {
                 imagenes[i] = f.apply(dom[i]);
             }
 
-            int[] noIguales = new int [2]; 
-            //El primer numero nos dice si es inyectiva o no y el segundo el cardinal de las imágenes
-            int cont = 0;
-            
-            for (int i = 0; (i < imagenes.length - 1); i++) {  
+            int[] noIguales = new int[2];
+            //En la primera posición indicamos si es inyectiva o no y en el segundo la diferencia de cardinales
+
+            for (int i = 0; (i < imagenes.length - 1); i++) {
                 for (int j = i + 1; j < imagenes.length; j++) {
                     if (imagenes[i] == imagenes[j]) { // si encontramos dos imagenes iguales, no es inyectiva
                         noIguales[0] = 1;
                     }
-                    
-                }cont ++;
+
+                }
             }
-            
-            noIguales[1] = cont - codom.length;
+
+            noIguales[1] = imagenes.length - codom.length;
             return noIguales;
         }
     /*

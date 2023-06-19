@@ -601,64 +601,32 @@ class Entrega {
      * Suposau que el graf és un DAG. Retornau el nombre de descendents amb grau de sortida 0 del
      * vèrtex i-èssim.
      */
-        static int exercici3(int[][] g, int i) {
-            int cont = 0;
-
-            for (int v = i; v < g.length; v++) {
-                boolean esFulla = true;
-
-                for (int vei = 0; vei < g[v].length; vei++) {
-                    if (g[v].length != 0) {
-                        esFulla = false;
-                    }
-                }
-
-                if (esFulla) {
-                    cont++;
+       static int exercici3(int[][] g, int i){
+        int nodos=g.length;
+        int cont;
+        boolean[] visto= new boolean[nodos];
+        cont= recorrerNodo(i,visto,nodos,g);
+         
+        
+        return cont;
+        
+    }
+    static int recorrerNodo(int nodo, boolean[] visto, int nodost,int[][] g){
+        visto[nodo]=true;
+        int cont=0;
+        if(g[nodo].length>0){
+            for(int i=0; i<g[nodo].length;i++){
+                if( !visto[g[nodo][i]]){
+                    cont= cont + recorrerNodo(g[nodo][i],visto,nodost,g);
                 }
             }
-            System.out.println(cont);
-            return cont;
         }
-    //    static int exercici3(int[][] g, int i) {
-//        int cont=0;
-//       boolean[] visto = new boolean[g.length];
-//       for(int j=i;j<g.length;j++){  //j=i porque le metemos el nodo por el que empieza a buscar.
-//           if(!visto[j]){
-//               Preorden(j, visto,g,cont);
-//           }
-//       }
-//        
-//      return cont; // TO DO
-//    }
-//    
-//    /*
-//        Hay que recorrer la matriz de esta manera, cuando la longitud de una fila sea 0
-//        sumamos porque quiere decir que es una hoja, pero me da error. Si no es hoja y
-//        hay un nodo sin visitar lo visita, por eso llamamos al metodo dentro del metodo.
-//        El ejercicio 4 es lo mismo, solo que hay que ir sumando cada vez que te metes en un
-//        nodo el contador, y guardamos el numero mas grande de trayectoria que es el diametro
-//    */
-//    static int Preorden(int nodo, boolean visto[],int matriz[][], int cont){
-//        
-//        visto[nodo]=true;
-//        
-//        if(matriz[nodo].length==0){
-//            cont++;
-//        }else{
-//            for(int i=0;i<matriz[nodo].length;i++){
-//                if(!visto[matriz[nodo][i]]){
-//                    Preorden( nodo,visto,matriz,cont);
-//                }
-// 
-//            }
-//        }
-//        
-//        
-//        return cont;           
-//               
-//        
-//    }
+        if(g[nodo].length==0){
+            cont++;
+        }
+        return cont;
+    
+    }
 
     /*
      * Donat un arbre arrelat (dirigit, suposau que l'arrel es el vèrtex 0), trobau-ne el diàmetre

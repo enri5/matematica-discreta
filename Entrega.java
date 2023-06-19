@@ -56,91 +56,91 @@ class Entrega {
    * petit com per poder provar tots els casos que faci falta).
    */
   static class Tema1 {
-    /*
+  
+        /*
      * És cert que ∀x ∃!y. P(x) -> Q(x,y) ?
-     */
+         */
         static boolean exercici1(int[] universe, Predicate<Integer> p, BiPredicate<Integer, Integer> q) {
-            // TO DO
             int ytrobat = 0;
             for (int i = 0; i < universe.length; i++) {
                 int x = universe[i];
                 for (int j = 0; (j < universe.length); j++) {
                     int y = universe[j];
                     if (!p.test(x) || q.test(x, y)) {
-                            ytrobat++;
-                        } 
-                        
+                        ytrobat++;
+                    }
+
+                }
+            }
+            return (ytrobat == universe.length);
+        }
+
+        /*
+     * És cert que ∃!x ∀y. P(y) -> Q(x,y) ?
+         */
+        static boolean exercici2(int[] universe, Predicate<Integer> p, BiPredicate<Integer, Integer> q) {
+            int unic = 0;
+            boolean cumple;
+            for (int i = 0; i < universe.length; i++) {
+                int x = universe[i];
+                cumple = true;
+                for (int j = 0; j < universe.length; j++) {
+                    int y = universe[j];
+                    if (!(!p.test(y) || q.test(x, y))) {
+                        cumple = false;
                     }
                 }
-            return (ytrobat==universe.length);
-        }
-
-    /*
-     * És cert que ∃!x ∀y. P(y) -> Q(x,y) ?
-     */
-    static boolean exercici2(int[] universe, Predicate<Integer> p, BiPredicate<Integer, Integer> q) {
-       int unic=0;
-       boolean cont;
-     for(int i=0; i<universe.length;i++){
-        int x = universe[i];
-        cont=true;
-        for (int j =0; j<universe.length;j++){
-          int y = universe[j];
-          if (!(!p.test(y) || q.test(x,y))){
-           cont=false;
-          }
-        }
-        if (cont){
-          unic++;
-        }
-      }
-      return (unic==1);
-    }
-
-    /*
-     * És cert que ∃x,y ∀z. P(x,z) ⊕ Q(y,z) ?
-     */
-    static boolean exercici3(int[] universe, BiPredicate<Integer, Integer> p, BiPredicate<Integer, Integer> q) {
-      boolean cumple=false;
-      for (int i=0; i<universe.length;i++){
-        int x = universe[i];
-        for (int j=0; j<universe.length;j++){
-          int y = universe[j];
-          int todoz=0;
-          for (int k=0; k<universe.length;k++){
-            int z = universe[k];
-            if((!p.test(x,z) && q.test(y,z)) || (p.test(x,z) && !q.test(y,z))){
-              todoz++;
+                if (cumple) {
+                    unic++;
+                }
             }
-          }
-          if(todoz==universe.length){
-            cumple=true;
-          }
+            return (unic == 1);
         }
-      }
-      return cumple;
-    }
 
-    /*
+        /*
+     * És cert que ∃x,y ∀z. P(x,z) ⊕ Q(y,z) ?
+         */
+        static boolean exercici3(int[] universe, BiPredicate<Integer, Integer> p, BiPredicate<Integer, Integer> q) {
+            boolean cumple = false;
+            for (int i = 0; i < universe.length; i++) {
+                int x = universe[i];
+                for (int j = 0; j < universe.length; j++) {
+                    int y = universe[j];
+                    int todoz = 0;
+                    for (int k = 0; k < universe.length; k++) {
+                        int z = universe[k];
+                        if ((!p.test(x, z) && q.test(y, z)) || (p.test(x, z) && !q.test(y, z))) {
+                            todoz++;
+                        }
+                    }
+                    if (todoz == universe.length) {
+                        cumple = true;
+                    }
+                }
+            }
+            return cumple;
+        }
+
+        /*
      * És cert que (∀x. P(x)) -> (∀x. Q(x)) ?
-     */
-    static boolean exercici4(int[] universe, Predicate<Integer> p, Predicate<Integer> q) {
-      boolean px=true;
-      boolean qx=true;
-      for(int i=0;i<universe.length;i++){
-        int x = universe[i];
-        if(!p.test(x)){
-          px=false;
+         */
+        static boolean exercici4(int[] universe, Predicate<Integer> p, Predicate<Integer> q) {
+            boolean px = true;
+            boolean qx = true;
+            for (int i = 0; i < universe.length; i++) {
+                int x = universe[i];
+                if (!p.test(x)) {
+                    px = false;
+                }
+            }
+            for (int i = 0; i < universe.length; i++) {
+                int x = universe[i];
+                if (!q.test(x)) {
+                    qx = false;
+                }
+            }
+            return (!px || qx);
         }
-      }
-        for(int i=0;i<universe.length;i++){
-        int x = universe[i];
-        if(!q.test(x)){
-          qx=false;
-        }
-      }
-      return (!px || qx);
-    }
 
     /*
      * Aquí teniu alguns exemples i proves relacionades amb aquests exercicis (vegeu `main`)
@@ -240,165 +240,104 @@ class Entrega {
    * int[] a, el codomini int[] b, i f un objecte de tipus Function<Integer, Integer> que podeu
    * avaluar com f.apply(x) (on x és d'a i el resultat f.apply(x) és de b).
    */
-  static class Tema2 {
-    /*
+    static class Tema2 {
+
+        /*
      * Comprovau si la relació `rel` definida sobre `a` és d'equivalència.
      *
      * Podeu soposar que `a` està ordenat de menor a major.
-     */
-    static boolean exercici1(int[] a, int[][] rel) {
-     
-        //reflexiva
-        //Recorremos la matriz y comprobamos que haya relaciones (a,a)
-        //Si hay tantas relaciones como numeros en a[], es reflexiva
-        int x,y,z,t;
-        int cont=0;
-        boolean reflexiva=false;
-        for(int i=0;i<rel.length;i++){
-            x= rel[i][0];
-            y= rel[i][1];
-            if(x==y){
-                cont++;
-            }
-        }
-        if(cont== a.length){
-            reflexiva=true;
-        }
-        //simetrica
-        //Recorremos la matriz 2 veces para comprobar si existe la combinacion girada
-        boolean simetrica=false;
-        cont=0;
-        for (int i=0;i<rel.length;i++){
-            x= rel[i][0];
-            y= rel[i][1];
-            for(int j=0; j<rel.length;j++){
-                z= rel[j][1];
-                t= rel[j][0];
-                if((x==z)&&(y==t)){
-                    cont++;  
-                }
-            }
-        }
-        if (cont==rel.length){
-            simetrica=true;
-        }
-        //transitiva
-        //partimos de que es transitiva y si no se cumple la condicion deja de serlo
-        boolean transitiva=true;
-        cont=0;
-        for (int i=0;i<rel.length;i++){
-            x= rel[i][0];
-            y= rel[i][1];
-            for(int j=0; j<rel.length;j++){
-                z= rel[j][0];
-                t= rel[j][1];
-              //recorremos 2 veces la matriz para encontrar aRb1 y b2Rc
-                
-                if(y==z){ // si b1==b2
-                    boolean encontrada=false;
-                    for(int k=0;k<rel.length;k++){  //buscamos aRc
-                        int b= rel[k][0];
-                        int c= rel[k][1];
-                        if((x==b && t==c)){  //si a==a y c==c
-                            encontrada=true;
-                        }
-                    }
-                    if(!encontrada){  //si acabamos el bucle y no se cumple la cond, no es transitiva
-                        transitiva=false;
-                    }
-                }
-            
-            }
-        }
-        
-        
-        
-        
-      return (reflexiva && simetrica && transitiva); //si cumple las 3 relaciones es de equivalencia
-    }
+         */
+        static boolean exercici1(int[] a, int[][] rel) {
 
-    /*
+            return reflexiva(a, rel) && simetrica(a, rel) && transitiva(a, rel);
+        }
+
+        /*
      * Comprovau si la relació `rel` definida sobre `a` és d'equivalència. Si ho és, retornau el
      * cardinal del conjunt quocient de `a` sobre `rel`. Si no, retornau -1.
      *
      * Podeu soposar que `a` està ordenat de menor a major.
-     */
-    static int exercici2(int[] a, int[][] rel) {
-       //reflexiva
-        //Recorremos la matriz y comprobamos que haya relaciones (a,a)
-        //Si hay tantas relaciones como numeros en a[], es reflexiva
-        int x,y,z,t;
-        int cont=0;
-        int retorn =-1;
-        boolean reflexiva=false;
-        for(int i=0;i<rel.length;i++){
-            x= rel[i][0];
-            y= rel[i][1];
-            if(x==y){
-                cont++;
+         */
+        static int exercici2(int[] a, int[][] rel) {
+            if (reflexiva(a, rel) && simetrica(a, rel) && transitiva(a, rel)) {
+                return a.length / 3;
+            } else {
+                return -1;
             }
         }
-        if(cont== a.length){
-            reflexiva=true;
-        }
-        //simetrica
-        //Recorremos la matriz 2 veces para comprobar si existe la combinacion girada
-        boolean simetrica=false;
-        cont=0;
-        for (int i=0;i<rel.length;i++){
-            x= rel[i][0];
-            y= rel[i][1];
-            for(int j=0; j<rel.length;j++){
-                z= rel[j][1];
-                t= rel[j][0];
-                if((x==z)&&(y==t)){
-                    cont++;  
+
+        // SUBMETODOS PARA exercicis 1 i 2
+        static boolean reflexiva(int[] a, int[][] rel) {
+            //reflexiva
+            //Recorremos la matriz y comprobamos que haya relaciones (a,a)
+            //Si hay tantas relaciones como numeros en a[], es reflexiva
+            int x, y;
+            int cont = 0;
+            for (int[] rel1 : rel) {
+                x = rel1[0];
+                y = rel1[1];
+                if (x == y) {
+                    cont++;
                 }
             }
+            return cont == a.length;
         }
-        if (cont==rel.length){
-            simetrica=true;
+
+        static boolean simetrica(int[] a, int[][] rel) {
+            //simetrica
+            //Recorremos la matriz 2 veces para comprobar si existe la combinacion girada
+            int x, y, z, t;
+            int cont = 0;
+            for (int[] rel1 : rel) {
+                x = rel1[0];
+                y = rel1[1];
+                for (int[] rel2 : rel) {
+                    z = rel2[1];
+                    t = rel2[0];
+                    if ((x == z) && (y == t)) {
+                        cont++;
+                    }
+                }
+            }
+            return cont == rel.length;
         }
-        //transitiva
-        //partimos de que es transitiva y si no se cumple la condicion deja de serlo
-        boolean transitiva=true;
-        cont=0;
-        for (int i=0;i<rel.length;i++){
-            x= rel[i][0];
-            y= rel[i][1];
-            for(int j=0; j<rel.length;j++){
-                z= rel[j][0];
-                t= rel[j][1];
-              //recorremos 2 veces la matriz para encontrar aRb1 y b2Rc
-                
-                if(y==z){ // si b1==b2
-                    boolean encontrada=false;
-                    for(int k=0;k<rel.length;k++){  //buscamos aRc
-                        int b= rel[k][0];
-                        int c= rel[k][1];
-                        if((x==b && t==c)){  //si a==a y c==c
-                            encontrada=true;
+
+        static boolean transitiva(int[] a, int[][] rel) {
+            //transitiva
+            //partimos de que es transitiva y si no se cumple la condicion deja de serlo
+            int x, y, z, t;
+            boolean transitiva = true;
+            for (int[] rel1 : rel) {
+                x = rel1[0];
+                y = rel1[1];
+                for (int[] rel2 : rel) {
+                    z = rel2[0];
+                    t = rel2[1];
+                    //recorremos 2 veces la matriz para encontrar aRb1 y b2Rc
+                    if (y == z) { // si b1==b2
+                        boolean encontrada = false;
+                        for (int[] rel3 : rel) {
+                            //buscamos aRc
+                            int b = rel3[0];
+                            int c = rel3[1];
+                            if ((x == b && t == c)) {  //si a==a y c==c
+                                encontrada = true;
+                            }
+                        }
+                        if (!encontrada) {  //si acabamos el bucle y no se cumple la cond, no es transitiva
+                            transitiva = false;
                         }
                     }
-                    if(!encontrada){  //si acabamos el bucle y no se cumple la cond, no es transitiva
-                        transitiva=false;
-                    }
                 }
-            
             }
+            return transitiva;
         }
-      
-      if(reflexiva && simetrica && transitiva){
-        retorn = a.length /3;
-      }
-      return retorn; // TO DO
-    }
 
-    /*
+        /*
      * Comprovau si la relació `rel` definida entre `a` i `b` és una funció.
      *
      * Podeu soposar que `a` i `b` estan ordenats de menor a major.
-     */
+         */
         static boolean exercici3(int[] a, int[] b, int[][] rel) {
             boolean funcio = true;
             for (int i = 0; (i < a.length) && funcio; i++) {
@@ -410,14 +349,14 @@ class Entrega {
             return funcio;
         }
 
-    /*
+        /*
      * Suposau que `f` és una funció amb domini `dom` i codomini `codom`.  Retornau:
      * - Si és exhaustiva, el màxim cardinal de l'antiimatge de cada element de `codom`.
      * - Si no, si és injectiva, el cardinal de l'imatge de `f` menys el cardinal de `codom`.
      * - En qualsevol altre cas, retornau 0.
      *
      * Podeu suposar que `dom` i `codom` estàn ordenats de menor a major.
-     */
+         */
         static int exercici4(int[] dom, int[] codom, Function<Integer, Integer> f) {
             int[] Injectiva = injectiva(dom, codom, f);
             int[][] Exhaustiva = exhaustiva(dom, codom, f);
@@ -469,7 +408,6 @@ class Entrega {
                     }
                 }
             }
-
             return Anti;
         }
 

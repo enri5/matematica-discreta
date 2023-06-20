@@ -633,7 +633,32 @@ class Entrega {
      * del graf subjacent. Suposau que totes les arestes tenen pes 1.
      */
     static int exercici4(int[][] g) {
-      return -1; // TO DO
+      int nodos=g.length;
+        
+        boolean[] visto= new boolean[nodos];
+        int dist=0;
+        dist=recorrerArbol(0,visto,dist,g);
+        int maxdist=0;
+        
+        
+      return dist;
+    }
+     static int recorrerArbol(int nodo, boolean[] visto, int dist,int[][] g){
+        visto[nodo]=true;
+        dist++;
+        if(g[nodo].length>0){
+            for(int i=0; i<g[nodo].length;i++){
+                if( !visto[g[nodo][i]]){
+                    dist=recorrerArbol(g[nodo][i],visto,dist,g);
+                    
+                }
+            }
+            dist--;
+            
+        }
+        
+        return dist;
+    
     }
 
     /*

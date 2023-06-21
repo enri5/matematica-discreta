@@ -787,49 +787,63 @@ class Entrega {
      * Si no en té, retornau null.
      */
     static int[] exercici1(int a, int b, int n) {
+       int mcd = MCD(a, b);
+            if (b % mcd != 0) {
+                return null;
+            }
+            
+            if (Euclides(a/mcd,n/mcd)== -1){
+                return null;
+            }
+            
+            int solucion= (b/mcd * Euclides(a/mcd,n/mcd)) % n/mcd;
+            
+            if(solucion<0){
+                solucion += n;
+            }
+            if(mcd<0){
+                mcd=mcd*-1; //Al calcular el mcd no se tiene en cuenta los numeros negativos por lo que lo damos en valor absoluto;
+            }
+            n=n/mcd;        //Si el mcd no es 1 se pueden simplificar los resultados
+            solucion= solucion%n;
+            
+            
+            return new int[] {solucion,n};
+
+            
+        }
+     private static int MCD(int a, int b) {
+            if (b != 0) {
+                return MCD(b, a % b);
+            } else {
+                return a;
+            }
+        }
+
+        private static int Euclides(int a, int n) {
+            int x1 = n;
+            int x2 = a;
+            int y1=0;
+            int y2=1;
+            
+            while(x2>0){
+                int c= x1/x2;
+                int r= x1 - c * x2;
+                x1=x2;
+                x2=r;
+                
+                int y3 = y1 -c * y2;
+                y1 = y2;
+                y2= y3;
+            }
+            if(x1==1){
+              return y1; 
+            } else{
+                return -1;
+            }
+        }
       
-        //Aloritmo de Euclides para calcular mcd
-        int c, d,tempx0,tempx1,tempx2,tempy0,tempy1,tempy2;
-        c=a;
-        d=n;
-        int cociente;
-        tempx0=1;
-        tempy0=0;
-        tempx1=0;
-        tempy1=1;
-        tempx2=0;
-        tempy2=0;
-        while(c != 0){
-            int x = c;
-            cociente=d/c;
-            System.out.println("Cociente " +cociente);
-            c = d%c;
-            System.out.println("c " +c);
-            d= x;
-            tempx2= tempx0-(tempx1*cociente);
-            tempy2= tempy0-(tempy1*cociente);
-            tempx0=tempx1;
-            tempx1=tempx2;
-            tempy0=tempy1;
-            tempy1=tempy2;
-            System.out.println("temp1 " +tempx0);
-            System.out.println("temp2 " +tempx2);
-        }
-        
-        if( b % d != 0){
-            return null;
-        }
-        
-        cociente= b/d;
-        System.out.println("Cociente " +cociente);
-        tempy2 = tempy0 * cociente;
-        tempx2 = tempx0 *cociente;
-        System.out.println(tempx0);
-        
-        return (new int[] {tempx0,n});
-        
-        // ax + dy = b
-    }
+    
 
     /*
      * Donau la solució (totes) del sistema d'equacions

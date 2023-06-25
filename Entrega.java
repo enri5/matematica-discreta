@@ -72,7 +72,7 @@ class Entrega {
 
                 }
             }
-            return (ytrobat == universe.length);
+            return (ytrobat == universe.length);  //Para cada x existe un unico y, por lo tanto y= universe.length
         }
 
         /*
@@ -94,7 +94,7 @@ class Entrega {
                     unic++;
                 }
             }
-            return (unic == 1);
+            return (unic == 1);    //Para cuanlquier y solo hay 1 x que lo cumpla
         }
 
         /*
@@ -109,11 +109,11 @@ class Entrega {
                     int todoz = 0;
                     for (int k = 0; k < universe.length; k++) {
                         int z = universe[k];
-                        if ((!p.test(x, z) && q.test(y, z)) || (p.test(x, z) && !q.test(y, z))) {
+                        if ((!p.test(x, z) && q.test(y, z)) || (p.test(x, z) && !q.test(y, z))) {    //XOR
                             todoz++;
                         }
                     }
-                    if (todoz == universe.length) {
+                    if (todoz == universe.length) {     //Si z se cumple en todo el universo es verdadero
                         cumple = true;
                     }
                 }
@@ -127,19 +127,19 @@ class Entrega {
         static boolean exercici4(int[] universe, Predicate<Integer> p, Predicate<Integer> q) {
             boolean px = true;
             boolean qx = true;
-            for (int i = 0; i < universe.length; i++) {
+            for (int i = 0; i < universe.length; i++) {    //Siempre es verdadero, si hay un solo caso que no ya no lo es.
                 int x = universe[i];
                 if (!p.test(x)) {
                     px = false;
                 }
             }
-            for (int i = 0; i < universe.length; i++) {
+            for (int i = 0; i < universe.length; i++) {    
                 int x = universe[i];
                 if (!q.test(x)) {
                     qx = false;
                 }
             }
-            return (!px || qx);
+            return (!px || qx);      //Implicacion
         }
 
     /*
@@ -249,7 +249,7 @@ class Entrega {
          */
         static boolean exercici1(int[] a, int[][] rel) {
 
-            return reflexiva(a, rel) && simetrica(a, rel) && transitiva(a, rel);
+            return reflexiva(a, rel) && simetrica(a, rel) && transitiva(a, rel);    //Rel de equivalencia si son estas tres relaciones 
         }
 
         /*
@@ -259,7 +259,7 @@ class Entrega {
      * Podeu soposar que `a` està ordenat de menor a major.
          */
         static int exercici2(int[] a, int[][] rel) {
-            if (reflexiva(a, rel) && simetrica(a, rel) && transitiva(a, rel)) {
+            if (reflexiva(a, rel) && simetrica(a, rel) && transitiva(a, rel)) {    //Si es de orden se devuelve el cardinal
                 return a.length / 3;
             } else {
                 return -1;
@@ -267,7 +267,7 @@ class Entrega {
         }
 
         // SUBMETODOS PARA exercicis 1 i 2
-        static boolean reflexiva(int[] a, int[][] rel) {
+        static boolean reflexiva(int[] a, int[][] rel) {    
             //reflexiva
             //Recorremos la matriz y comprobamos que haya relaciones (a,a)
             //Si hay tantas relaciones como numeros en a[], es reflexiva
@@ -276,7 +276,7 @@ class Entrega {
             for (int[] rel1 : rel) {
                 x = rel1[0];
                 y = rel1[1];
-                if (x == y) {
+                if (x == y) {    // aRa
                     cont++;
                 }
             }
@@ -291,10 +291,10 @@ class Entrega {
             for (int[] rel1 : rel) {
                 x = rel1[0];
                 y = rel1[1];
-                for (int[] rel2 : rel) {
+                for (int[] rel2 : rel) {  
                     z = rel2[1];
                     t = rel2[0];
-                    if ((x == z) && (y == t)) {
+                    if ((x == z) && (y == t)) {    // aRb  bRa
                         cont++;
                     }
                 }

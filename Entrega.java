@@ -891,19 +891,24 @@ class Entrega {
      * (el que coneixeu com el mètode manual d'anar provant).
      */
     static ArrayList<Integer> exercici3a(int n) {
-        int indice = 0;
-        ArrayList<Integer> res = new ArrayList<Integer>();
-        for (int i = 2; i <= n; i++) {
-            while (n % i == 0) {
-                res.add(i);
-                indice++;
-                n /= i;
-            }
-        }       
-        return res;
-    }
 
-    /*
+            return Euler(n);
+        }
+
+        static ArrayList<Integer> Euler(int n) {
+            int indice = 0;
+            ArrayList<Integer> res = new ArrayList<Integer>();
+            for (int i = 2; i <= n; i++) {
+                while (n % i == 0) {
+                    res.add(i);
+                    indice++;
+                    n /= i;
+                }
+            }
+            return res;
+        }
+
+        /*
      * Retornau el nombre d'elements invertibles a Z mòdul n³.
      *
      * Alerta: podeu suposar que el resultat hi cap a un int (32 bits a Java), però n³ no té perquè.
@@ -911,10 +916,62 @@ class Entrega {
      *
      * No podeu utilitzar `long` per solucionar aquest problema. Necessitareu l'exercici 3a.
      * No, tampoc podeu utilitzar `double`.
-     */
-    static int exercici3b(int n) {
-      return -1; // TO DO
-    }
+         */
+        static int exercici3b(int n) {
+            ArrayList<Integer> c = Euler(n);        
+            int[] euler = new int[c.size()];
+            for (int i = 0; i < c.size(); i++) {    //Paso de arraylist a array
+                euler[i] = c.get(i);
+
+            }
+            ArrayList<Integer> neuler = new ArrayList<Integer>();
+            int cont = 0;
+            
+            for (int i = 0; i < euler.length; i++) {    //Como n^3 sus numeros se multiplican por 3
+                cont++;                                 
+                neuler.add(euler[i]);
+                if (i != euler.length - 1) {
+                    if (euler[i] != euler[i + 1]) {
+                        cont *= 2;
+                        for (int j = 0; j < cont; j++) {
+                            neuler.add(euler[i]);
+                        }
+                        cont = 0;
+                    }
+                } else {
+                    cont *= 2;
+                    for (int j = 0; j < cont; j++) {
+                        neuler.add(euler[i]);
+                    }
+                    cont = 0;
+
+                }
+            }
+            int res = 1;
+
+            for (int i = 0; i < neuler.size(); i++) {       //Calculo la funcion de Euler
+                cont++;
+                if (i != neuler.size() - 1) {
+                    if (neuler.get(i) != neuler.get(i + 1)) {
+                        System.out.println(neuler.get(i));
+                        System.out.println("Cont: "+cont);
+                        res *= Math.pow(neuler.get(i), cont - 1);   //Cuento cuantas veces se repite el numero y lo elevo a ese mismo -1
+                        res *= neuler.get(i)-1;                       //Le multiplico el anterior
+                        System.out.println("Res: "+ res);
+                        cont = 0;
+                    }
+                } else {
+                    res *= Math.pow(neuler.get(i), cont - 1);
+                    res *= neuler.get(i)-1;
+                    
+                    cont = 0;
+                }   
+            }
+            
+            
+            return res;
+
+        }
 
     /*
      * Aquí teniu alguns exemples i proves relacionades amb aquests exercicis (vegeu `main`)

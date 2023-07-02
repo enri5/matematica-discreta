@@ -923,8 +923,53 @@ class Entrega {
      * Si la solució és de la forma x ≡ c (mod m), retornau `new int[] { c, m }`, amb 0 ⩽ c < m.
      * Si no en té, retornau null.
      */
-    static int[] exercici2b(int[] a, int[] b, int[] n) {
-      return null; // TO DO
+    static int[] exercici2b(int[] a, int[] b, int[] n) { //Resolvemos con metodo de sustitución
+       for(int i=0;i<a.length;i++){
+                if(b[i]% MCD(a[i],n[i]) !=0 || (a[i]==0 || b[i]==0) ){      //Comprobamos si tiene solucion
+                    return null;
+                }
+            }
+            int[] mcd=new int[a.length];
+            for(int i=0;i<mcd.length;i++){
+                mcd[i]=MCD(a[i],n[i]);
+                if(b[i]%mcd[i]==0){     //Si se puede simplificar se simplifica
+                    a[i] /= mcd[i];
+                    b[i] /= mcd[i];
+                    n[i] /= mcd[i];
+                }
+            }
+            
+            int[]x=new int[]{b[0],n[0]};
+            while(b[0]<0){  //Si es negativo lo convertimos en positivo en su mod
+                b[0]+=n[0];
+            }
+            b[1]= b[1]-(x[0]*a[1]);
+            while(b[1]%(x[0]*a[1]) !=0){
+                b[1]+=n[1];
+            }
+            b[1]/=x[0]*a[1];
+            int[]y=new int[]{b[1],n[1]};
+            while(b[1]<0){  //Si es negativo lo convertimos en positivo en su mod
+                b[1]+=n[1];
+            }
+            b[2]= b[2]-x[0]*a[2];
+            b[2]= b[2]-(x[1]*a[2]*y[0]);
+            while(b[2]%(x[1]*a[2]*y[1])!=0){
+                b[2]+=n[2];
+            }
+            b[2]/=x[1]*a[2]*y[1];
+            int[]z=new int[]{b[2],n[2]};
+            x[0]+=y[0]*x[1];
+            x[1]*=y[1];
+            x[0]+=z[0]*x[1];
+            x[1]*=z[1];
+            
+            if(x[1]<0){ //Si N es negativo se pone en positivo
+                x[1]*=-1;
+            }
+            return x;
+      
+      
     }
 
     /*

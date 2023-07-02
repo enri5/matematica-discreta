@@ -860,7 +860,53 @@ class Entrega {
      * Si no en té, retornau null.
      */
     static int[] exercici2a(int[] b, int[] n) {
-      return null; // TO DO
+      int p[] = new int[b.length];
+            int q[] = new int[b.length];
+            int x = 0;
+            for (int i = 0; i < b.length; i++) {   //Si es un numero negativo lo pasamos a positivo
+                while (b[i] < 0) {
+                    b[i] += n[i];
+                    
+                }
+            }
+            for (int i = 0; i < p.length; i++) {    //Inicializamos p
+                p[i] = 1;
+            }
+
+            for (int i = 0; i < p.length; i++) {    //Calcular p
+                for (int j = 0; j < b.length; j++) {
+                    if (i != j) {
+                        p[i] *= n[j];
+                        
+                    }
+                }
+                q[i] = p[i] % n[i];
+                
+            }
+            for (int i = 0; i < q.length; i++) {
+                if (MCD(q[i], n[i]) != 1) {
+                    return null;                //MCD diferente
+                }
+            }
+
+            for (int i = 0; i < q.length; i++) {    //Calculamos q
+                q[i] = Euclides(q[i], n[i]);
+            }
+
+            for (int i = 0; i < p.length; i++) {    //Calculamos x
+                x += p[i] * q[i] * b[i];
+            }
+
+            int m = 1;
+
+            for (int i = 0; i < n.length; i++) {    //Calculamos m
+                m *= n[i];
+            }
+            while (x < 0) { //Poner m positiva
+                x += m;
+            }
+            return new int[]{x, m}; // TO DO
+      
     }
 
     /*

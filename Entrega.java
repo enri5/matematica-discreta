@@ -1044,11 +1044,8 @@ class Entrega {
                 cont++;
                 if (i != neuler.size() - 1) {
                     if (neuler.get(i) != neuler.get(i + 1)) {
-                        System.out.println(neuler.get(i));
-                        System.out.println("Cont: "+cont);
                         res *= Math.pow(neuler.get(i), cont - 1);   //Cuento cuantas veces se repite el numero y lo elevo a ese mismo -1
                         res *= neuler.get(i)-1;                       //Le multiplico el anterior
-                        System.out.println("Res: "+ res);
                         cont = 0;
                     }
                 } else {
